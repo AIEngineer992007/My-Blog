@@ -3,8 +3,4 @@ Django==6.1.1
 gunicorn==26.2.0
 pillow==12.3.0
 sqlparse==0.6.0
-<<<<<<< HEAD
 whitenoise==6.9.0
-=======
-whitenoise==6.9.0
->>>>>>> 3c24755 (Configure staticfiles and WhiteNoise for production)
