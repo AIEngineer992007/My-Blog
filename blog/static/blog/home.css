@@ -1,0 +1,392 @@
+/* Layout tổng quan dạng Grid 2 cột */
+.main-container {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+}
+
+/* --- Cột Bài Viết (Post Cards) --- */
+.posts-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.post-card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 1.2rem 1.5rem;
+}
+
+.post-meta {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.4rem;
+    margin-bottom: 0.6rem;
+    font-size: 0.85rem;
+}
+
+.author-name {
+    color: #428bca;
+    text-decoration: none;
+    font-weight: 600;
+    margin-right: 0.5rem;
+}
+
+.author-name:hover {
+    text-decoration: underline;
+}
+
+.post-date {
+    color: #777777;
+}
+
+.post-title {
+    margin: 0.3rem 0 0.6rem 0;
+    font-size: 1.75rem;
+    font-weight: 500;
+}
+
+.post-title a {
+    color: #333333;
+    text-decoration: none;
+}
+
+.post-content {
+    color: #444444;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* --- Cột Sidebar --- */
+.sidebar-card {
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 1.2rem;
+}
+
+.sidebar-title {
+    font-size: 1.5rem;
+    color: #333333;
+    margin-bottom: 0.5rem;
+}
+
+.sidebar-desc {
+    color: #666666;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.sidebar-list {
+    list-style: none;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+}
+
+.sidebar-item {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e0e0e0;
+    color: #555555;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.sidebar-item:last-child {
+    border-bottom: none;
+}
+
+.sidebar-item:hover {
+    background-color: #f1f1f1;
+}
+
+/* Responsive cho màn hình điện thoại */
+@media (max-width: 768px) {
+    .main-container {
+        grid-template-columns: 1fr;
+    }
+}
+.post-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.post-thumbnail {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.post-header-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.post-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+    color: #1a1a1a;
+}
+
+.post-author {
+    font-size: 13px;
+    color: #666;
+    margin: 4px 0 0 0;
+}
+
+.post-excerpt {
+    font-size: 15px;
+    color: #333;
+    line-height: 1.5;
+    margin: 0;
+}
+.post-form-card {
+    display: block;
+    padding: 24px;
+}
+
+.form-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+    color: #1a1a1a;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    min-height: 180px;
+    resize: vertical;
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #74ee84;
+    box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.15);
+}
+
+.form-error {
+    color: #dc3545;
+    font-size: 13px;
+    margin: 4px 0 0 0;
+}
+.pager {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 32px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 15px;
+}
+
+.pager a,
+.pager span.current {
+    min-width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #2b2620;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.pager a:hover {
+    border-color: #8a8378;
+}
+
+.pager span.current {
+    color: #5b4636;
+    font-weight: bold;
+    border-bottom: 1px solid #5b4636;
+}
+
+.pager span.gap {
+    color: #8a8378;
+    min-width: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pager .step {
+    font-size: 13px;
+    color: #8a8378;
+    padding: 0 6px;
+    text-decoration: none;
+}
+
+.pager .step:hover {
+    color: #2b2620;
+}
+
+.pager .step.disabled {
+    color: #e4ddd2;
+    pointer-events: none;
+}
+.sidebar-item a {
+    display: block;          /* link phủ hết chiều rộng của li, cả ô bấm được */
+    width: 100%;
+    height: 100%;
+    padding: inherit;        /* nếu padding đang đặt ở .sidebar-item, đổi qua đây */
+    color: inherit;          /* giữ nguyên màu chữ như cũ, không bị xanh/tím mặc định */
+    text-decoration: none;   /* bỏ gạch chân mặc định của link */
+}
+
+.sidebar-item a:hover {
+    text-decoration: none;
+}
+
+.sidebar-item.active a {
+    color: inherit;          /* đảm bảo item "active" (màu xanh) giữ đúng màu */
+}
+
+.mini-calendar {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  overflow: hidden;
+  margin-top: 20px;
+}
+.mc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: #2f3e9e;
+  color: #fff;
+}
+.mc-header button {
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: #fff;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.mc-header button:hover { background: rgba(255,255,255,0.3); }
+.mc-title {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.mc-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 10px;
+  gap: 2px;
+}
+.mc-weekday {
+  text-align: center;
+  font-size: 10px;
+  font-weight: 600;
+  color: #8a8f9c;
+  padding-bottom: 4px;
+}
+.mc-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  border-radius: 6px;
+  color: #2c2e3a;
+}
+.mc-day.other-month { color: #d3d5db; }
+.mc-day.today {
+  background: #2f3e9e;
+  color: #fff;
+  font-weight: 700;
+}
+.mc-day.selected:not(.today) {
+  background: #e6e9fb;
+  font-weight: 600;
+}
+.mc-day:not(.other-month):hover:not(.today) {
+  background: #f0f1f6;
+  cursor: pointer;
+}
+.mc-footer {
+  padding: 8px 14px 12px;
+  text-align: center;
+}
+.mc-footer button {
+  background: none;
+  border: 1px solid #d8dae2;
+  color: #2f3e9e;
+  padding: 5px 14px;
+  border-radius: 6px;
+  font-size: 11px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.mc-footer button:hover { background: #f0f1f6; }
+
+.btn-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e30c0c;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 20px; /* bo tròn dạng pill */
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.btn-submit:hover {
+    background-color: #eb5151; /* đậm hơn 1 chút khi hover */
+}
+
+.btn-submit:active {
+    background-color: #145dbf;
+}

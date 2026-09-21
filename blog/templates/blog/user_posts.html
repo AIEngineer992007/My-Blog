@@ -1,0 +1,56 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'blog/user_posts.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/home.css' %}">
+{% endblock %}
+
+{% block content %}
+    <header class="author-masthead">
+        <img src="{{ view_user.profile.image.url }}" alt="{{ view_user.username }}" class="author-masthead-avatar">
+        <div>
+            <p class="author-masthead-label">Tác giả</p>
+            <h1 class="author-masthead-name">{{ view_user.username }}</h1>
+            <p class="author-masthead-count">{{ page_obj.paginator.count }} bài viết</p>
+        </div>
+    </header>
+
+{% for post in posts %}
+    <div class="post-card">
+        <div class="post-header">
+            <img src="{{ post.author.profile.image.url }}" alt="Post thumbnail" class="post-thumbnail">
+            <div class="post-header-text">
+                <h2 class="post-title">
+                    <a href='{% url 'posts-detail' post.id %}'>{{ post.title }}</a>
+                </h2>
+                <p class="post-author" href='{% url 'user-posts' post.author.username %}'>{{ post.author }} · {{ post.date_posted|date:"F d, Y" }}</p>
+            </div>
+        </div>
+        <p class="post-excerpt">{{ post.content|truncatewords:20 }}</p>
+    </div>
+{% empty %}
+    <p class="empty-state">Tác giả này chưa có bài viết nào.</p>
+{% endfor %}
+
+<nav class="pager" aria-label="Phân trang">
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}" class="step">‹ Trước</a>
+    {% endif %}
+
+    {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+            <span class="current">{{ num }}</span>
+        {% elif num == 1 or num == page_obj.paginator.num_pages or num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <a href="?page={{ num }}">{{ num }}</a>
+        {% elif num == 2 or num == page_obj.paginator.num_pages|add:'-1' %}
+            <span class="gap">···</span>
+        {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}" class="step">Sau ›</a>
+    {% endif %}
+</nav>
+
+{% endblock content %}

@@ -1,0 +1,81 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Navbar</title>
+
+    <!-- Thêm icon từ FontAwesome nếu muốn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static "blog/base.css" %}">
+    <link rel="stylesheet" href="{% static 'blog/nav.css' %}">
+
+    {% block extra_css %}
+    {% endblock %}
+</head>
+<body>
+
+    <header class="site-header">
+        <nav class="navbar">
+
+            <a href="/" class="nav-logo">MyBlog<span class="nav-logo-dot">.</span></a>
+
+            <button type="button" class="nav-toggle" id="navToggle" aria-label="Mở menu" aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <div class="nav-collapse" id="navCollapse">
+
+                <ul class="nav-menu">
+                    <li><a href="/" class="nav-link{% if request.resolver_match.url_name == 'home' %} active{% endif %}">Trang chủ</a></li>
+                    <li><a href="{% url 'intro' %}" class="nav-link{% if request.resolver_match.url_name == 'intro' %} active{% endif %}">Giới thiệu</a></li>
+                    <li><a href="{% url 'contact' %}" class="nav-link{% if request.resolver_match.url_name == 'contact' %} active{% endif %}">Liên hệ</a></li>
+                </ul>
+
+                <div class="nav-actions">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'post-create' %}" class="btn-new-post-nav">+ Viết bài</a>
+                        <div class="nav-user">
+                            <a href="{% url 'profile' %}" class="nav-user-link">
+                                <i class="fas fa-user-circle"></i> {{ user.username }}
+                            </a>
+                            <form action="{% url 'logout' %}" method="post" class="logout-form">
+                                {% csrf_token %}
+                                <button type="submit" class="btn-outline">Đăng xuất</button>
+                            </form>
+                        </div>
+                    {% else %}
+                        <a href="{% url 'register' %}" class="btn-outline">Đăng ký</a>
+                        <a href="{% url 'login' %}" class="btn-solid">Đăng nhập</a>
+                    {% endif %}
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Khối hiển thị thông báo (Messages Container) -->
+        {% if messages %}
+            <div class="messages-container">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <script src="{% static 'blog/nav.js' %}"></script>
+    {% block extra_js %}
+    {% endblock %}
+</body>
+</html>

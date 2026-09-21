@@ -1,0 +1,58 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Viết bài viết{% endblock %}</title>
+    {% block extra_css %}
+        <link rel="stylesheet" href="{% static 'blog/home.css' %}">
+    {% endblock %}
+</head>
+
+<div class="main-container">
+    <!-- Cột trái: Form đăng/sửa bài viết -->
+    <div class="posts-section">
+        <div class="post-card post-form-card">
+            <h2 class="form-title">
+                {% if object %}Chỉnh sửa bài viết{% else %}Viết bài viết mới{% endif %}
+            </h2>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                {% for field in form %}
+                    <div class="form-group">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.errors %}
+                            <p class="form-error">{{ field.errors|striptags }}</p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+                <button type="submit" class="btn-submit">
+                    {% if object %}Lưu thay đổi{% else %}Đăng bài{% endif %}
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Cột phải: Sidebar -->
+    <aside class="sidebar-section">
+        <div class="sidebar-card">
+            <h3 class="sidebar-title">Our Sidebar</h3>
+            <p class="sidebar-desc">You can put any information here you'd like.</p>
+
+            <ul class="sidebar-list">
+                <li class="sidebar-item active">
+                    <a href="{% url 'latest-posts' %}">Latest Posts</a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="{% url 'oldest-posts' %}">Oldest Posts</a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+</div>
+{% endblock %}

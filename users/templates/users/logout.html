@@ -1,0 +1,33 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'users/logout.css' %}">
+{% endblock %}
+    
+{% block content %}
+<div class="auth-wrapper">
+    <div class="auth-card text-center">
+        <div class="auth-header">
+            <h2>Đã Đăng Xuất</h2>
+            <p>Bạn đã đăng xuất khỏi tài khoản MyBlog thành công.</p>
+        </div>
+
+        <div class="logout-icon-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ff4757" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+        </div>
+
+        <div class="auth-action">
+            <a href="{% url 'login' %}" class="btn-submit btn-block">Đăng nhập lại</a>
+        </div>
+
+        <div class="auth-footer">
+            <span>Trở về <a href="/">Trang chủ</a></span>
+        </div>
+    </div>
+</div>
+{% endblock content %}

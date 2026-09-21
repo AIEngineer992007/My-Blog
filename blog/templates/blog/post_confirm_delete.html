@@ -1,0 +1,48 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Xoá bài viết{% endblock %}</title>
+    {% block extra_css %}
+        <link rel="stylesheet" href="{% static 'blog/home.css' %}">
+    {% endblock %}
+</head>
+
+<div class="main-container">
+    <!-- Cột trái: Xác nhận xoá -->
+    <div class="posts-section">
+        <div class="post-card post-delete-card">
+            <h2 class="form-title">Xoá bài viết</h2>
+            <p class="delete-warning">
+                Bạn có chắc chắn muốn xoá bài viết
+                <strong>"{{ object.title }}"</strong>? Hành động này không thể hoàn tác.
+            </p>
+
+            <form method="POST">
+                {% csrf_token %}
+                <div class="delete-actions">
+                    <button type="submit" class="btn-delete-confirm">Xoá</button>
+                    <a href="{% url 'posts-detail' object.pk %}" class="btn-cancel">Huỷ</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Cột phải: Sidebar -->
+    <aside class="sidebar-section">
+        <div class="sidebar-card">
+            <h3 class="sidebar-title">Our Sidebar</h3>
+            <p class="sidebar-desc">You can put any information here you'd like.</p>
+
+            <ul class="sidebar-list">
+                <li class="sidebar-item">Latest Posts</li>
+                <li class="sidebar-item">Announcements</li>
+                <li class="sidebar-item">Calendars</li>
+                <li class="sidebar-item">etc</li>
+            </ul>
+        </div>
+    </aside>
+</div>
+{% endblock %}

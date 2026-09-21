@@ -1,0 +1,72 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'users/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="content-container">
+
+    <div class="content-section profile-section">
+        <div class="profile-media">
+            {% if user.profile.image %}
+                <img src="{{ user.profile.image.url }}" alt="Avatar" class="profile-avatar">
+            {% else %}
+                <div class="profile-avatar profile-avatar-placeholder">
+                    <i class="fas fa-user"></i>
+                </div>
+            {% endif %}
+            <div class="profile-info">
+                <h2>{{ user.username }}</h2>
+                <p>{{ user.email }}</p>
+            </div>
+        </div>
+
+        <!-- Form chỉnh sửa thông tin -->
+        <form method="POST" enctype="multipart/form-data" class="profile-edit-form">
+            {% csrf_token %}
+            <h3 class="form-heading">Cập nhật thông tin</h3>
+
+            {% for field in u_form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <p class="form-error">{{ field.errors|striptags }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            {% for field in p_form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <p class="form-help">{{ field.help_text }}</p>
+                    {% endif %}
+                    {% if field.errors %}
+                        <p class="form-error">{{ field.errors|striptags }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn-submit">Lưu thay đổi</button>
+        </form>
+    </div>
+
+    <div class="content-section sidebar">
+        <h3>Our Sidebar</h3>
+        <p>You can put any information here you'd like.</p>
+        <ul class="sidebar-list">
+            <li class="sidebar-item">
+                <a href="{% url 'latest-posts' %}">Latest Posts</a>
+            </li>
+            <li class="sidebar-item">
+                <a href="{% url 'oldest-posts' %}">Oldest Posts</a>
+            </li>
+        </ul>
+    </div>
+
+</div>
+{% endblock %}

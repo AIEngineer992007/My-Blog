@@ -1,0 +1,13 @@
+<div class="comment-item" data-comment-id="{{ comment.id }}">
+    <div class="comment-item-header">
+        <strong>{{ comment.author.username }}</strong>
+        <span class="comment-date">{{ comment.date_posted|date:"d/m/Y H:i" }}</span>
+        {% if comment.author == user %}
+            <button type="button"
+                    class="comment-delete-btn"
+                    data-delete-url="{% url 'comment-delete' comment.id %}"
+                    onclick="deleteComment(this)">Xóa</button>
+        {% endif %}
+    </div>
+    <p class="comment-content">{{ comment.content }}</p>
+</div>

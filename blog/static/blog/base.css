@@ -1,0 +1,388 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #ccd1de;
+}
+
+/* Navbar Container */
+.navbar-container {
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+}
+
+/* Logo */
+.nav-logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2c3e50;
+  text-decoration: none;
+}
+
+.nav-logo span {
+  color: #ff4757;
+  /* Điểm nhấn cho Logo */
+}
+
+/* Menu Links */
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #ff4757;
+}
+
+/* Hiệu ứng gạch chân mượt mà khi hover */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #ff4757;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* Actions: Search & Button */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background: #f1f2f6;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+}
+
+.search-box input {
+  border: none;
+  background: transparent;
+  outline: none;
+  padding: 0.2rem;
+  font-size: 0.9rem;
+}
+
+.search-box button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #777;
+}
+
+.btn-subscribe {
+  background-color: #ff4757;
+  color: #fff;
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn-subscribe:hover {
+  background-color: #e84118;
+}
+
+/* Responsive cho Mobile */
+.hamburger {
+  display: none;
+  cursor: pointer;
+}
+
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  transition: all 0.3s ease-in-out;
+  background-color: #333;
+}
+
+@media (max-width: 768px) {
+
+  .nav-menu,
+  .nav-actions {
+    display: none;
+    /* Dùng JS để bật/tắt menu trên mobile nếu muốn */
+  }
+
+  .hamburger {
+    display: block;
+  }
+}
+
+/* Container chứa các thông báo */
+.messages-container {
+  max-width: 1100px;
+  margin: 1rem auto 0 auto;
+  padding: 0 1rem;
+}
+
+/* Định dạng chung cho thẻ Alert */
+.alert {
+  padding: 0.85rem 1.25rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+}
+
+/* Màu sắc theo từng tag của Django Message */
+.alert-success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+
+.alert-error,
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.alert-warning {
+  color: #856404;
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+}
+
+.alert-info {
+  color: #0c5460;
+  background-color: #d1ecf1;
+  border-color: #bee5eb;
+}
+
+.btn-login {
+  display: inline-block;
+  padding: 8px 20px;
+  border: 1.5px solid #ff4757;
+  border-radius: 20px;
+  color: #ff4757;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-login:hover {
+  background-color: #ff4757;
+  color: #ffffff;
+}
+
+.btn-username {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 20px;
+  border-radius: 20px;
+  color: #d43939;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+.btn-username i {
+  font-size: 16px;
+}
+
+.logout-form {
+  display: inline-block;
+  margin: 0;
+}
+
+.logout-form .btn-login {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 20px;
+  background-color: #fff;
+  color: #e63950;
+  border: 1.5px solid #e63950;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.logout-form .btn-logout:hover {
+  background-color: #e63950;
+  color: #fff;
+}
+
+.logout-form .btn-logout::before,
+.logout-form .btn-logout::after {
+  content: none;
+}
+
+.post-delete-card {
+  display: block;
+  padding: 24px;
+}
+
+.delete-warning {
+  font-size: 15px;
+  color: #333;
+  line-height: 1.6;
+  margin: 12px 0 24px 0;
+}
+
+.delete-warning strong {
+  color: #1a1a1a;
+}
+
+.delete-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-delete-confirm {
+  padding: 8px 20px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-delete-confirm:hover {
+  background-color: #bb2d3b;
+}
+
+.btn-cancel {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 20px;
+  background-color: #f1f1f1;
+  color: #333;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.btn-cancel:hover {
+  background-color: #e2e2e2;
+}
+
+.btn-new-post-nav {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 18px;
+  background-color: #e63950;
+  color: #fff;
+  border: 1px solid #e63950;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-new-post-nav:hover {
+  background-color: #d1263c;
+  border-color: #d1263c;
+}
+
+.auth-box {
+    max-width: 420px;
+    margin: 64px auto;
+    padding: 40px;
+    background: #fdf3f1;
+    border-bottom: 3px solid #e0503f;
+    text-align: center;
+}
+
+.auth-heading {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 28px;
+    font-weight: normal;
+    color: #2b2620;
+    margin: 0 0 12px;
+}
+
+.auth-subtext {
+    font-family: Georgia, serif;
+    font-size: 14px;
+    color: #4a4438;
+    margin: 0 0 24px;
+    line-height: 1.6;
+}
+
+.auth-box form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.auth-box input {
+    padding: 10px 14px;
+    border: 1px solid #e4ddd2;
+    font-family: Georgia, serif;
+    font-size: 14px;
+}
+
+.auth-btn {
+    padding: 10px 14px;
+    background: #e0503f;
+    color: #fff;
+    border: none;
+    font-family: Georgia, serif;
+    font-size: 15px;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+}
+
+.auth-btn:hover {
+    opacity: 0.9;
+}

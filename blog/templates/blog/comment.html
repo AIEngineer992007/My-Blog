@@ -1,0 +1,142 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'blog/comment_model.css' %}">
+
+<div class="comment-modal-overlay" id="commentModalOverlay">
+    <div class="comment-modal-box">
+        <div class="comment-modal-header">
+            <h3>Bình luận (<span id="commentCount">{{ comments.count }}</span>)</h3>
+            <button type="button" class="comment-modal-close" onclick="closeCommentModal()">&times;</button>
+        </div>
+
+        <div class="comment-modal-list" id="commentModalList">
+            {% for comment in comments %}
+                {% include 'blog/comment_item.html' %}
+            {% empty %}
+                <p class="comment-empty">Chưa có bình luận nào. Hãy là người đầu tiên!</p>
+            {% endfor %}
+        </div>
+
+        {% if user.is_authenticated %}
+            <form method="POST" class="comment-modal-form" id="commentModalForm">
+                {% csrf_token %}
+                {{ form.content }}
+                <p class="comment-modal-hint">Nhấn Enter để gửi, Shift + Enter để xuống dòng</p>
+            </form>
+        {% else %}
+            <p class="comment-login-note">
+                <a href="{% url 'login' %}">Đăng nhập</a> để bình luận.
+            </p>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    function openCommentModal() {
+        document.getElementById('commentModalOverlay').classList.add('active');
+        const textarea = document.querySelector('#commentModalForm textarea');
+        if (textarea) textarea.focus();
+    }
+
+    function closeCommentModal() {
+        document.getElementById('commentModalOverlay').classList.remove('active');
+    }
+
+    document.getElementById('commentModalOverlay').addEventListener('click', function (e) {
+        if (e.target === this) closeCommentModal();
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeCommentModal();
+    });
+
+    function getCsrfToken() {
+        return document.querySelector('#commentModalForm [name=csrfmiddlewaretoken]').value;
+    }
+
+    function submitCommentAjax() {
+        const form = document.getElementById('commentModalForm');
+        const textarea = form.querySelector('textarea');
+        const content = textarea.value.trim();
+        if (!content) return;
+
+        fetch(window.location.pathname, {
+            method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': getCsrfToken(),
+            },
+            body: new URLSearchParams({ content: content }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const emptyNote = document.getElementById('commentEmptyNote');
+                if (emptyNote) emptyNote.remove();
+
+                const list = document.getElementById('commentModalList');
+                list.insertAdjacentHTML('beforeend', data.comment_html);
+                list.scrollTop = list.scrollHeight;
+
+                document.getElementById('commentCount').textContent = data.comment_count;
+
+                const reactionCount = document.querySelector('.btn-comment-jump .reaction-count');
+                if (reactionCount) reactionCount.textContent = data.comment_count;
+
+                textarea.value = '';
+            } else {
+                alert(data.error || 'Có lỗi xảy ra, thử lại nhé.');
+            }
+        })
+        .catch(() => alert('Không gửi được bình luận, kiểm tra kết nối mạng.'));
+    }
+
+    const commentTextarea = document.querySelector('#commentModalForm textarea');
+    if (commentTextarea) {
+        commentTextarea.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                submitCommentAjax();
+            }
+        });
+    }
+
+    function deleteComment(button) {
+    if (!confirm('Bạn có chắc muốn xóa bình luận này?')) return;
+
+    const url = button.getAttribute('data-delete-url');
+    const commentItem = button.closest('.comment-item');
+    const commentId = commentItem.getAttribute('data-comment-id');
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRFToken': getCsrfToken(),
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            if (commentItem) commentItem.remove();
+
+            const countEl = document.getElementById('commentCount');
+            if (countEl) countEl.textContent = data.comment_count;
+
+            const reactionCount = document.querySelector('.btn-comment-jump .reaction-count');
+            if (reactionCount) reactionCount.textContent = data.comment_count;
+
+            const list = document.getElementById('commentModalList');
+            if (list && data.comment_count === 0) {
+                list.insertAdjacentHTML('beforeend', '<p class="comment-empty" id="commentEmptyNote">Chưa có bình luận nào. Hãy là người đầu tiên!</p>');
+            }
+        } else {
+            alert(data.error || 'Không xóa được bình luận.');
+        }
+    })
+    .catch(err => {
+        console.error('Lỗi xóa:', err);
+        alert('Có lỗi khi xóa bình luận.');
+    });
+    }
+</script>

@@ -1,0 +1,71 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{{ object.title }}{% endblock %}</title>
+    <!-- Vị trí để các trang con nạp thêm CSS riêng -->
+    {% block extra_css %}
+        <link rel="stylesheet" href="{% static 'blog/home.css' %}">
+        <link rel="stylesheet" href="{% static 'blog/post_detail.css' %}">
+
+    {% endblock %}
+</head>
+<div class="main-container">
+    <!-- Cột trái: Chi tiết bài viết -->
+    <div class="posts-section">
+        <div class="post-card post-detail-card">
+            <div class="post-header">
+                <img src="{{ object.author.profile.image.url }}" alt="Author avatar" class="post-thumbnail">
+                <div class="post-header-text">
+                    <h2 class="post-title">{{ object.title }}</h2>
+                    <p class="post-author">{{ object.author }} · {{ object.date_posted|date:"F d, Y" }}</p>
+                </div>
+            </div>
+
+            <p class="post-content">{{ object.content|linebreaks }}</p>
+            
+            <div class="post-reactions">
+                <a href="{% url 'post-like' object.pk %}"
+                   class="btn-reaction btn-like {% if user in object.liked_by.all %}active{% endif %}">
+                    👍 Thích <span class="reaction-count">{{ object.liked_by.count }}</span>
+                </a>
+                <a href="{% url 'post-dislike' object.pk %}"
+                   class="btn-reaction btn-dislike {% if user in object.disliked_by.all %}active{% endif %}">
+                    👎 Không thích <span class="reaction-count">{{ object.disliked_by.count }}</span>
+                </a>
+                <a href="javascript:void(0)" onclick="openCommentModal()" class="btn-reaction btn-comment-jump">
+                    💬 Bình luận <span class="reaction-count">{{ comments.count }}</span>
+                </a>
+            </div>
+
+            {% if object.author == user %}
+                <div class="post-actions">
+                    <a class="btn-edit" href="{% url 'post-update' object.pk %}">Sửa</a>
+                    <a class="btn-delete" href="{% url 'post-delete' object.pk %}">Xoá</a>
+                </div>
+            {% endif %}
+        </div>
+
+        {% include 'blog/comment.html' %}
+    </div>
+
+    <!-- Cột phải: Sidebar -->
+    <aside class="sidebar-section">
+        <div class="sidebar-card">
+            <h3 class="sidebar-title">Our Sidebar</h3>
+            <p class="sidebar-desc">You can put any information here you'd like.</p>
+
+            <ul class="sidebar-list">
+                <li class="sidebar-item active">
+                    <a href="{% url 'latest-posts' %}">Latest Posts</a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="{% url 'oldest-posts' %}">Oldest Posts</a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+</div>
+{% endblock %}

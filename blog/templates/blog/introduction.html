@@ -1,0 +1,37 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block title %}Giới thiệu{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'blog/introduction.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="about-wrapper">
+  <div class="about-card">
+    <h1>Xin chào, mình là DangHai 👋</h1>
+
+    <p>Chào mừng bạn đến với <strong>MyBlog</strong> — nơi mình chia sẻ mọi thứ xoay quanh lập trình, công nghệ và những gì mình học được trên hành trình làm dev.</p>
+
+    <h2>Vì sao có blog này?</h2>
+    <p>Mình lập MyBlog vì nhận ra: học một thứ mới rất dễ quên nếu không viết lại. Vậy nên thay vì để kiến thức nằm im trong note cá nhân, mình quyết định viết ra công khai — vừa để nhớ lâu hơn, vừa hy vọng giúp được ai đó đang gặp vấn đề giống mình.</p>
+
+    <h2>Bạn sẽ tìm thấy gì ở đây?</h2>
+    <ul>
+      <li>Bài viết về lập trình web, chủ yếu xoay quanh Python/Django và JavaScript</li>
+      <li>Ghi chú thực chiến: lỗi mình từng gặp, cách debug, mẹo tối ưu code</li>
+      <li>Review công cụ, thư viện mình thấy hữu ích</li>
+      <li>Đôi khi là vài dòng lan man về hành trình học lập trình — thất bại nhiều hơn thành công, nhưng vui là chính</li>
+    </ul>
+
+    <h2>Triết lý viết của mình</h2>
+    <p>Mình cố gắng viết đơn giản, dễ hiểu, giải thích cả "tại sao" chứ không chỉ "làm thế nào" — vì hiểu bản chất mới nhớ lâu và áp dụng linh hoạt được.</p>
+
+    <h2>Kết nối với mình</h2>
+    <p>Có góp ý, câu hỏi, hay chỉ đơn giản muốn chào hỏi — đừng ngại nhắn cho mình qua trang <a href="{% url 'contact' %}">Liên hệ</a>, hoặc để lại bình luận dưới bài viết. Mình đọc hết và luôn trả lời!</p>
+
+    <p class="signoff">Cảm ơn bạn đã ghé MyBlog. Chúc bạn code vui! 🚀</p>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,137 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<style>
+    .error-404-wrapper {
+        min-height: 70vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 40px 20px;
+    }
+
+    .error-404-code {
+        font-size: 9rem;
+        font-weight: 900;
+        line-height: 1;
+        margin: 0;
+        background: linear-gradient(135deg, #ff6b6b, #f7b733, #6b5bff);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: gradient-move 3s ease infinite, wiggle 1.8s ease-in-out infinite;
+    }
+
+    @keyframes gradient-move {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    @keyframes wiggle {
+        0%, 100% { transform: rotate(-2deg); }
+        50% { transform: rotate(2deg); }
+    }
+
+    .error-404-emoji {
+        font-size: 3.5rem;
+        display: inline-block;
+        margin-bottom: 10px;
+        animation: bounce 1s ease infinite;
+    }
+
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-14px); }
+    }
+
+    .error-404-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin: 10px 0 8px;
+    }
+
+    .error-404-subtitle {
+        font-size: 1.05rem;
+        color: #666;
+        max-width: 480px;
+        margin: 0 auto 6px;
+        line-height: 1.6;
+    }
+
+    .error-404-joke {
+        font-style: italic;
+        color: #999;
+        margin: 14px 0 28px;
+        font-size: 0.95rem;
+    }
+
+    .error-404-actions {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .error-404-btn {
+        display: inline-block;
+        padding: 12px 26px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .error-404-btn-primary {
+        background: #6b5bff;
+        color: #fff;
+        box-shadow: 0 4px 14px rgba(107, 91, 255, 0.35);
+    }
+
+    .error-404-btn-secondary {
+        background: #f1f1f1;
+        color: #333;
+    }
+
+    .error-404-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    }
+
+    .error-404-cat {
+        margin-top: 34px;
+        font-size: 0.85rem;
+        color: #bbb;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="error-404-wrapper">
+    <div class="error-404-emoji">🙈</div>
+    <h1 class="error-404-code">404</h1>
+    <p class="error-404-title">Ơ kìa, trang này đi lạc rồi!</p>
+    <p class="error-404-subtitle">
+        Có thể nó đi mua trà đá, có thể nó chưa từng tồn tại,
+        hoặc có thể bạn gõ nhầm URL — dù sao thì nó cũng không có ở đây.
+    </p>
+    <p class="error-404-joke">
+        (Server đã tìm khắp nơi, kể cả gầm giường, vẫn không thấy trang bạn cần 🔍)
+    </p>
+
+    <div class="error-404-actions">
+        <a href="{% url 'blog-home' %}" class="error-404-btn error-404-btn-primary">
+            🏠 Về nhà cho lành
+        </a>
+        <a href="javascript:history.back()" class="error-404-btn error-404-btn-secondary">
+            ↩️ Quay lại trang trước
+        </a>
+    </div>
+
+    <p class="error-404-cat">— Mã lỗi 404, không phải lỗi tại bạn, là tại URL nó "giận dỗi" —</p>
+</div>
+{% endblock content %}

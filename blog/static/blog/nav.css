@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&display=swap');
+
+:root {
+  --nav-ink: #202333;
+  --nav-navy: #2f3e9e;
+  --nav-navy-dark: #232f7c;
+  --nav-red: #e63946;
+  --nav-bg: #ffffff;
+  --nav-border: #ececf0;
+  --nav-muted: #6b7080;
+}
+
+* { box-sizing: border-box; }
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--nav-bg);
+  border-bottom: 1px solid var(--nav-border);
+}
+
+.navbar {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 28px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+/* Logo */
+.nav-logo {
+  font-family: 'Sora', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--nav-ink);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  flex-shrink: 0;
+}
+.nav-logo-dot { color: var(--nav-red); }
+
+/* Collapsible area (menu + actions) */
+.nav-collapse {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Menu */
+.nav-menu {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  flex-shrink: 0;
+}
+.nav-link {
+  position: relative;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--nav-muted);
+  text-decoration: none;
+  padding: 6px 0;
+  transition: color 0.15s;
+}
+.nav-link:hover { color: var(--nav-ink); }
+.nav-link.active { color: var(--nav-red); }
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background: var(--nav-red);
+  border-radius: 2px;
+}
+
+/* Actions (right side) */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.btn-solid, .btn-outline, .btn-new-post-nav {
+  font-size: 14px;
+  font-weight: 700;
+  padding: 9px 18px;
+  border-radius: 999px;
+  text-decoration: none;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+.btn-solid {
+  background: var(--nav-red);
+  color: #fff;
+}
+.btn-solid:hover { background: #d12836; }
+
+.btn-outline {
+  background: transparent;
+  color: var(--nav-red);
+  border-color: var(--nav-red);
+}
+.btn-outline:hover { background: rgba(230,57,70,0.08); }
+
+.btn-new-post-nav {
+  background: var(--nav-navy);
+  color: #fff;
+}
+.btn-new-post-nav:hover { background: var(--nav-navy-dark); }
+
+.logout-form { margin: 0; }
+
+/* User menu */
+.nav-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-user-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--nav-ink);
+  text-decoration: none;
+}
+.nav-user-link i { font-size: 18px; color: var(--nav-navy); }
+.nav-user-link:hover { color: var(--nav-navy); }
+
+/* Mobile toggle button */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+}
+.nav-toggle .bar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--nav-ink);
+  border-radius: 2px;
+  transition: transform 0.2s, opacity 0.2s;
+}
+.nav-toggle.open .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open .bar:nth-child(2) { opacity: 0; }
+.nav-toggle.open .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Responsive */
+@media (max-width: 860px) {
+  .navbar {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 14px 20px;
+  }
+  .nav-toggle { display: flex; }
+
+  .nav-collapse {
+    flex-basis: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease;
+  }
+  .nav-collapse.open {
+    max-height: 480px;
+    padding-top: 16px;
+    border-top: 1px solid var(--nav-border);
+    margin-top: 14px;
+  }
+
+  .nav-menu {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    width: 100%;
+  }
+  .nav-link { display: block; padding: 8px 0; }
+
+  .nav-actions { flex-wrap: wrap; width: 100%; }
+  .nav-user { flex-wrap: wrap; }
+}

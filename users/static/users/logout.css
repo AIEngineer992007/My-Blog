@@ -1,0 +1,101 @@
+/* Helper class để căn giữa nội dung trong card */
+.auth-card.text-center {
+    text-align: center;
+}
+
+/* Biểu tượng Logout */
+.logout-icon-wrapper {
+    margin: 20px 0 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logout-icon-wrapper svg {
+    background-color: rgba(255, 71, 87, 0.08);
+    padding: 16px;
+    border-radius: 50%;
+}
+
+/* Nút dạng thẻ <a> nhưng styled như button đăng nhập */
+.btn-block {
+    display: inline-block;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.auth-action {
+    margin-top: 15px;
+}
+/* --- Bổ sung style dùng chung từ login.css --- */
+
+/* Layout Wrapper */
+.auth-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    background-color: #f8f9fa;
+    min-height: calc(100vh - 80px);
+}
+
+/* Card Container */
+.auth-card {
+    background: #ffffff;
+    padding: 40px 35px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 480px;
+    border: 1px solid #eaeaea;
+}
+
+/* Header */
+.auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.auth-header h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #1a202c;
+    margin-bottom: 8px;
+}
+
+.auth-header p {
+    font-size: 14px;
+    color: #718096;
+}
+
+/* Button (màu đỏ hồng accent, đồng bộ với nút Đăng ký trên Navbar) */
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff4757;
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 10px;
+}
+
+.btn-submit:hover {
+    background-color: #e03847;
+}
+
+/* Footer Link */
+.auth-footer {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 14px;
+    color: #4a5568;
+}
+
+.auth-footer a {
+    color: #ff4757;
+    font-weight: 600;
+}

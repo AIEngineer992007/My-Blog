@@ -1,0 +1,68 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Blog{% endblock %}</title>
+    <!-- Vị trí để các trang con nạp thêm CSS riêng -->
+    {% block extra_css %}
+        <link rel="stylesheet" href="{% static 'blog/home.css' %}">
+    {% endblock %}
+</head>
+<div class="main-container">
+    <!-- Cột trái: Danh sách bài viết -->
+    <div class="posts-section">
+        {% for post in posts %}
+            <div class="post-card">
+                <div class="post-header">
+                    <img src="{{ post.author.profile.image.url }}" alt="Post thumbnail" class="post-thumbnail">
+                    <div class="post-header-text">
+                        <h2 class="post-title">
+                            <a href='{% url 'posts-detail' post.id %}'>{{ post.title }}</a>
+                        </h2>
+                        <p class="post-author">
+                            <a href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+                            · {{ post.date_posted|date:"F d, Y" }}
+                        </p>
+                    </div>
+                </div>
+                <p class="post-excerpt">{{ post.content|truncatewords:20 }}</p>
+            </div>
+        {% empty %}
+            <p>Chưa có bài viết nào.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Cột phải: Sidebar -->
+    <aside class="sidebar-section">
+        <div class="sidebar-card">
+            <h3 class="sidebar-title">Our Sidebar</h3>
+            <p class="sidebar-desc">You can put any information here you'd like.</p>
+            
+            <ul class="sidebar-list">
+                <li class="sidebar-item active">
+                    <a href="{% url 'latest-posts' %}">Latest Posts</a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="{% url 'oldest-posts' %}">Oldest Posts</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="mini-calendar">
+            <div class="mc-header">
+                <button id="mcPrevBtn">‹</button>
+                <div class="mc-title" id="mcTitle"></div>
+                <button id="mcNextBtn">›</button>
+            </div>
+            <div class="mc-grid" id="mcGrid"></div>
+            <div class="mc-footer">
+                <button id="mcTodayBtn">Hôm nay</button>
+            </div>
+        </div>
+    </aside>
+</div>
+<script src="{% static 'blog/calendar.js' %}"></script>
+{% endblock %}

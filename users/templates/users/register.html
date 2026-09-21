@@ -1,0 +1,52 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'users/register.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="register-container">
+    <div class="register-card">
+        <div class="register-header">
+            <h2>Đăng Ký Tài Khoản</h2>
+            <p>Tham gia cộng đồng Blog ngay hôm nay</p>
+        </div>
+
+        <form method="POST" class="register-form">
+            {% csrf_token %}
+
+            <!-- Báo lỗi tổng quan nếu form không hợp lệ -->
+            {% if forms.errors %}
+                <div class="alert-error">
+                    Vui lòng kiểm tra lại các thông tin bên dưới!
+                </div>
+            {% endif %}
+
+            <!-- Tự động render từng trường trong UserCreationForm -->
+            {% for field in forms %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    
+                    <!-- Hiển thị văn bản trợ giúp (ví dụ: yêu cầu độ dài mật khẩu) -->
+                    {% if field.help_text %}
+                        <small class="help-text">{{ field.help_text|safe }}</small>
+                    {% endif %}
+
+                    <!-- Hiển thị lỗi riêng của từng field -->
+                    {% for error in field.errors %}
+                        <span class="error-text">{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn-submit" href="{% url 'register' %}">Đăng ký</button>
+        </form>
+
+        <div class="register-footer">
+            <p>Đã có tài khoản? <a href="{% url 'login' %}">Đăng nhập ngay</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

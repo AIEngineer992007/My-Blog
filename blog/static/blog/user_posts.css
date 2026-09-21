@@ -1,0 +1,102 @@
+.author-heading {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 26px;
+    font-weight: normal;
+    color: #2b2620;
+    margin: 40px 0 32px;   /* ← thêm 40px phía trên */
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e4ddd2;
+}
+.post-article {
+    margin-bottom: 32px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid #e4ddd2;
+}
+
+.post-article:last-of-type {
+    border-bottom: none;
+}
+
+.post-article h2 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 20px;
+    font-weight: normal;
+    margin: 0 0 6px;
+}
+
+.post-article h2 a {
+    color: #2b2620;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease;
+}
+
+.post-article h2 a:hover {
+    border-color: #8a8378;
+}
+
+.post-date {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: #8a8378;
+    margin: 0 0 12px;
+}
+
+.post-excerpt {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #4a4438;
+    margin: 0;
+}
+
+.empty-state {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 15px;
+    color: #8a8378;
+    padding: 40px 0;
+    text-align: center;
+}
+.author-masthead {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin: 0 -24px 40px;
+    padding: 48px 24px;
+    background: #fdf3f1;
+    border-bottom: 3px solid #e0503f;
+}
+
+.author-masthead-avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 1px #e4ddd2;
+}
+
+.author-masthead-label {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: #e0503f;
+    margin: 0 0 4px;
+}
+
+.author-masthead-name {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: normal;
+    font-size: 44px;
+    line-height: 1.1;
+    color: #2b2620;
+    margin: 0 0 6px;
+}
+
+.author-masthead-count {
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: #8a8378;
+    margin: 0;
+}
